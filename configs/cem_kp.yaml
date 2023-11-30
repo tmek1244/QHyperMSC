@@ -1,0 +1,22 @@
+---
+solver:
+  type: vqa
+  optimizer:
+    type: scipy
+    maxfun: 200
+  pqc:
+    type: wfqaoa
+    layers: 5
+    penalty: 3
+  params_inits:
+    angles: [[0.5, 0.5, 0.5, 0.5, 0.5], [1, 1, 1, 1, 1]]
+    hyper_args: [1, 2.5, 2.5]
+  hyper_optimizer:
+    type: cem
+    processes: 5
+    samples_per_epoch: 100
+    epochs: 10
+problem:
+  type: knapsack
+  max_weight: 2
+  items: [[1, 2], [1, 2], [1, 1]]
