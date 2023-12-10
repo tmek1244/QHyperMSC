@@ -1,9 +1,6 @@
 ---
 solver:
   type: vqa
-  optimizer:
-    type: scipy
-    maxfun: 200
   pqc:
     type: wfqaoa
     layers: 5
@@ -14,8 +11,11 @@ solver:
   hyper_optimizer:
     type: cem
     processes: 5
-    samples_per_epoch: 100
-    epochs: 10
+    samples_per_epoch: PLACEHOLDER
+    epochs: PLACEHOLDER
+    elite_frac: PLACEHOLDER
+    bounds: [[1, 10], [1, 10], [1, 10]]
+    disable_tqdm: true
 problem:
   type: knapsack
   max_weight: 2
