@@ -44,8 +44,8 @@ problems = {
     },
     'tsp_3': {
         'type': 'tsp',
-        'number_of_cities': 4,
-        'cities_coords': [[0, 0], [0, 1], [1, 1], [0.4, 0.6]]
+        'number_of_cities': 2,
+        'cities_coords': [[0, 0], [0.4, 0.6]]
     },
     'tsp_4': {
         'type': 'tsp',
