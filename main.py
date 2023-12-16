@@ -22,7 +22,7 @@ def run_experiment(config, samples_per_epoch, elite_frac):
 
 
 if __name__ == '__main__':
-    file_name = "cem_test.yaml"
+    file_name = "cem_scipy_test.yaml"
 
     with open(f"configs/{file_name}", 'r') as stream:
         try:
@@ -40,7 +40,7 @@ if __name__ == '__main__':
                   f"{samples_per_epoch}, elite_frac={elite_frac}")
 
             results = [
-                run_experiment(samples_per_epoch, elite_frac)
+                run_experiment(config, samples_per_epoch, elite_frac)
                 for _ in range(10)
             ]
             print(f"Results: {np.mean(results)} +- {np.std(results)}")

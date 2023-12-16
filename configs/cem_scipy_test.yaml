@@ -1,6 +1,9 @@
 ---
 solver:
   type: vqa
+  optimizer:
+    type: scipy
+    maxfun: 200
   pqc:
     type: wfqaoa
     layers: 5
