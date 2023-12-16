@@ -21,7 +21,42 @@ problems = {
         'type': 'knapsack',
         'max_weight': 4,
         'items': [[1, 2], [3, 2], [2, 3], [1, 1]]
-    }
+    },
+    'kp_4': {
+        'type': 'knapsack',
+        'max_weight': 3,
+        'items': [[3, 5], [1, 2], [1, 1]]
+    },
+    'kp_5': {
+        'type': 'knapsack',
+        'max_weight': 1,
+        'items': [[1, 2], [1, 1]]
+    },
+    'tsp_1': {
+        'type': 'tsp',
+        'number_of_cities': 3,
+        'cities_coords': [[0, 0], [0, 1], [1, 0]]
+    },
+    'tsp_2': {
+        'type': 'tsp',
+        'number_of_cities': 2,
+        'cities_coords': [[0, 0], [1, 1]]
+    },
+    'tsp_3': {
+        'type': 'tsp',
+        'number_of_cities': 4,
+        'cities_coords': [[0, 0], [0, 1], [1, 1], [0.4, 0.6]]
+    },
+    'tsp_4': {
+        'type': 'tsp',
+        'number_of_cities': 3,
+        'cities_coords': [[0, 0], [1, 1], [0.5, 0.7]]
+    },
+    'tsp_5': {
+        'type': 'tsp',
+        'number_of_cities': 3,
+        'cities_coords': [[0.2, 0.7], [0.4, 0.8], [0.8, 0.1]]
+    },
 }
 
 
@@ -64,9 +99,13 @@ if __name__ == "__main__":
             'solver': solvers[SOLVER],
             'problem': problems[PROBLEM],
         })
+        if 'kp' in PROBLEM:
+            hyper_args = [1, 2.5, 2.5]
+        elif 'tsp' in PROBLEM:
+            hyper_args = [1, 2, 2, 2, 2]
         results = solver.solve({
                 'angles': angle,
-                'hyper_args': [1, 2.5, 2.5]
+                'hyper_args': hyper_args
             })
         value = weighted_avg_evaluation(
             results.results_probabilities, solver.problem.get_score, limit_results=30)
