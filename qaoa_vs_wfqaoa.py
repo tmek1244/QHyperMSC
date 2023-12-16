@@ -96,22 +96,27 @@ if __name__ == "__main__":
     angles = np.random.rand(1_000, 5, 2)
 
     def run_solver(angle):
+        if 'kp' in PROBLEM:
+            hyper_args = [1, 2.5, 2.5]
+            penalty = 0
+        elif 'tsp' in PROBLEM:
+            cities = problems[PROBLEM]['number_of_cities']
+            hyper_args = [1] + (cities + 1) * [2]
+            penalty = 5
+            solvers['wfqaoa']['pqc']['penalty'] = penalty
+
         solver = solver_from_config({
             'solver': solvers[SOLVER],
             'problem': problems[PROBLEM],
         })
-        if 'kp' in PROBLEM:
-            hyper_args = [1, 2.5, 2.5]
-        elif 'tsp' in PROBLEM:
-            cities = problems[PROBLEM]['number_of_cities']
-            hyper_args = [1] + (cities + 1) * [2]
         results = solver.solve({
                 'angles': angle,
                 'hyper_args': hyper_args
             })
         value = weighted_avg_evaluation(
-            results.results_probabilities, solver.problem.get_score, limit_results=30)
-        print(angle, value)
+            results.results_probabilities, solver.problem.get_score,
+            limit_results=30, penalty=penalty)
+        # print(angle, value)
         with open(f'./results/{PROBLEM}_{SOLVER}.txt', 'a') as f:
             f.write(f'{value}\n')
 
