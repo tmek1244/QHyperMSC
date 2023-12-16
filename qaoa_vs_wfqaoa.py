@@ -93,7 +93,8 @@ if __name__ == "__main__":
 
     np.random.seed(0)
 
-    angles = np.random.rand(1_000 ,5, 2)
+    angles = np.random.rand(1_000, 5, 2)
+
     def run_solver(angle):
         solver = solver_from_config({
             'solver': solvers[SOLVER],
@@ -102,7 +103,8 @@ if __name__ == "__main__":
         if 'kp' in PROBLEM:
             hyper_args = [1, 2.5, 2.5]
         elif 'tsp' in PROBLEM:
-            hyper_args = [1, 2, 2, 2, 2]
+            cities = problems[PROBLEM]['number_of_cities']
+            hyper_args = [1] + (cities + 1) * [2]
         results = solver.solve({
                 'angles': angle,
                 'hyper_args': hyper_args
